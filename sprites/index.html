@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sprite Sheet Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sprite Sheet Generator</h1>
+    <input type="file" id="fileInput" />
+    <div>
+        <label for="spriteWidth">Sprite Width:</label>
+        <input type="number" id="spriteWidth" />
+    </div>
+    <div>
+        <label for="spriteHeight">Sprite Height:</label>
+        <input type="number" id="spriteHeight" />
+    </div>
+    <button id="generateButton">Generate Coordinates</button>
+    <h2>Generated JSON:</h2>
+    <pre id="jsonOutput"></pre>
+    <canvas id="canvas"></canvas>
+
+    <script src="script.js"></script>
+</body>
+</html>
