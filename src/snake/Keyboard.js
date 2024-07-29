@@ -1,51 +1,40 @@
-// Keyboard.js
 class Keyboard {
-    constructor(snake, options) {
-      this.snake = snake;
-      this.speed = options.speed || 5;
-      this.keys = {};
-      this.leftKey = options.leftKey;
-      this.rightKey = options.rightKey;
-      this.upKey = options.upKey;
-      this.downKey = options.downKey;
-  
-      window.addEventListener('keydown', (e) => this.onKeyDown(e));
-      window.addEventListener('keyup', (e) => this.onKeyUp(e));
+  constructor(snake, options) {
+    this.snake = snake;
+    this.keys = {};
+    this.leftKey = options.leftKey;
+    this.rightKey = options.rightKey;
+    this.upKey = options.upKey;
+    this.downKey = options.downKey;
+
+    window.addEventListener("keydown", (e) => this.onKeyDown(e));
+    window.addEventListener("keyup", (e) => this.onKeyUp(e));
+  }
+
+  onKeyDown(event) {
+    console.log(`Tecla pressionada: ${event.code}`);
+    this.keys[event.code] = true;
+  }
+
+  onKeyUp(event) {
+    console.log(`Tecla liberada: ${event.code}`);
+    this.keys[event.code] = false;
+  }
+
+  update() {
+    if (this.keys[this.leftKey] && this.snake.direction !== "right") {
+      this.snake.setNextDirection("left");
     }
-  
-    onKeyDown(event) {
-      console.log(`Tecla pressionada: ${event.code}`);
-      this.keys[event.code] = true;
+    if (this.keys[this.rightKey] && this.snake.direction !== "left") {
+      this.snake.setNextDirection("right");
     }
-  
-    onKeyUp(event) {
-      console.log(`Tecla liberada: ${event.code}`);
-      this.keys[event.code] = false;
+    if (this.keys[this.upKey] && this.snake.direction !== "down") {
+      this.snake.setNextDirection("up");
     }
-  
-    update() {
-  
-      let dx = 0;
-      let dy = 0;
-  
-      if (this.keys[this.leftKey]) {
-        dx = -this.speed;
-      }
-      if (this.keys[this.rightKey]) {
-        dx = this.speed;
-      }
-      if (this.keys[this.upKey]) {
-        dy = -this.speed;
-      }
-      if (this.keys[this.downKey]) {
-        dy = this.speed;
-      }
-  
-      // Move todos os segmentos da cobra
-      this.snake.moveAll(dx, dy);
-  
+    if (this.keys[this.downKey] && this.snake.direction !== "up") {
+      this.snake.setNextDirection("down");
     }
   }
-  
-  export default Keyboard;
-  
+}
+
+export default Keyboard;
