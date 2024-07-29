@@ -15,7 +15,7 @@ export function showGameOver(app) {
     
     const style = new TextStyle({
         fontSize: 72,
-        fill: '#ffffff', // Cor do texto
+        fill: '#ffffff',
         align: 'center',
     });
     const text = new Text({text:'Game Over', style});
