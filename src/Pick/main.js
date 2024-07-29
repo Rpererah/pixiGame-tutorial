@@ -1,5 +1,4 @@
 import { Application, Sprite, Container, Assets } from "pixi.js";
-import { createBall } from "./ball";
 import { createScoreText } from "./scoreText";
 import { createTicker } from "./ticker";
 import { createKeyboardControls } from "./keyboard";

@@ -4,7 +4,7 @@ export async function createBag(app) {
     const texture = await Assets.load('/src/Pick/bag.png');
     const sprite = new Sprite(texture);
 
-    sprite.height = 50;
+    sprite.height = 80;
     sprite.width = 100;
 
     sprite.x = (app.screen.width - sprite.width) / 2;
