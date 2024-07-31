@@ -1,0 +1,401 @@
+{
+  "frames": {
+    "asteroid2-0.png": {
+      "frame": { "x": 202, "y": 1, "w": 99, "h": 90 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 18, "y": 17, "w": 99, "h": 90 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-1.png": {
+      "frame": { "x": 303, "y": 1, "w": 98, "h": 90 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 19, "y": 18, "w": 98, "h": 90 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-2.png": {
+      "frame": { "x": 615, "y": 93, "w": 96, "h": 93 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 20, "y": 15, "w": 96, "h": 93 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-3.png": {
+      "frame": { "x": 614, "y": 188, "w": 94, "h": 96 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 21, "y": 12, "w": 94, "h": 96 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-4.png": {
+      "frame": { "x": 713, "y": 94, "w": 93, "h": 98 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 22, "y": 9, "w": 93, "h": 98 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-5.png": {
+      "frame": { "x": 303, "y": 93, "w": 92, "h": 100 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 22, "y": 7, "w": 92, "h": 100 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-6.png": {
+      "frame": { "x": 201, "y": 93, "w": 91, "h": 100 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 23, "y": 6, "w": 91, "h": 100 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-7.png": {
+      "frame": { "x": 403, "y": 1, "w": 90, "h": 100 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 24, "y": 5, "w": 90, "h": 100 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-8.png": {
+      "frame": { "x": 505, "y": 1, "w": 90, "h": 101 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 24, "y": 6, "w": 90, "h": 101 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-9.png": {
+      "frame": { "x": 405, "y": 93, "w": 92, "h": 103 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 23, "y": 5, "w": 92, "h": 103 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-10.png": {
+      "frame": { "x": 813, "y": 94, "w": 93, "h": 104 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 22, "y": 4, "w": 93, "h": 104 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-11.png": {
+      "frame": { "x": 99, "y": 186, "w": 93, "h": 104 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 22, "y": 3, "w": 93, "h": 104 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-12.png": {
+      "frame": { "x": 510, "y": 93, "w": 92, "h": 103 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 22, "y": 4, "w": 92, "h": 103 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-13.png": {
+      "frame": { "x": 415, "y": 187, "w": 93, "h": 101 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 21, "y": 6, "w": 93, "h": 101 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-14.png": {
+      "frame": { "x": 102, "y": 92, "w": 92, "h": 97 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 21, "y": 9, "w": 92, "h": 97 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-15.png": {
+      "frame": { "x": 518, "y": 187, "w": 94, "h": 94 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 19, "y": 12, "w": 94, "h": 94 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-16.png": {
+      "frame": { "x": 1, "y": 185, "w": 96, "h": 94 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 16, "y": 13, "w": 96, "h": 94 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-17.png": {
+      "frame": { "x": 106, "y": 281, "w": 96, "h": 97 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 13, "w": 96, "h": 97 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-18.png": {
+      "frame": { "x": 625, "y": 286, "w": 97, "h": 98 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 13, "y": 14, "w": 97, "h": 98 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-19.png": {
+      "frame": { "x": 725, "y": 286, "w": 97, "h": 99 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 12, "y": 14, "w": 97, "h": 99 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-20.png": {
+      "frame": { "x": 712, "y": 189, "w": 95, "h": 99 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 12, "y": 14, "w": 95, "h": 99 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-21.png": {
+      "frame": { "x": 813, "y": 189, "w": 95, "h": 96 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 12, "y": 16, "w": 95, "h": 96 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-22.png": {
+      "frame": { "x": 919, "y": 94, "w": 97, "h": 93 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 11, "y": 18, "w": 97, "h": 93 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-23.png": {
+      "frame": { "x": 608, "y": 1, "w": 99, "h": 90 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 10, "y": 21, "w": 99, "h": 90 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-24.png": {
+      "frame": { "x": 911, "y": 189, "w": 100, "h": 95 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 10, "y": 21, "w": 100, "h": 95 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-25.png": {
+      "frame": { "x": 1, "y": 378, "w": 100, "h": 99 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 10, "y": 20, "w": 100, "h": 99 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-26.png": {
+      "frame": { "x": 103, "y": 379, "w": 101, "h": 101 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 10, "y": 20, "w": 101, "h": 101 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-27.png": {
+      "frame": { "x": 206, "y": 379, "w": 102, "h": 101 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 10, "y": 21, "w": 102, "h": 101 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-28.png": {
+      "frame": { "x": 310, "y": 379, "w": 101, "h": 102 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 12, "y": 20, "w": 101, "h": 102 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-29.png": {
+      "frame": { "x": 413, "y": 380, "w": 101, "h": 102 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 13, "y": 20, "w": 101, "h": 102 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-30.png": {
+      "frame": { "x": 625, "y": 385, "w": 102, "h": 103 },
+      "rotated": true,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 21, "w": 102, "h": 103 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-31.png": {
+      "frame": { "x": 838, "y": 386, "w": 104, "h": 104 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 13, "y": 21, "w": 104, "h": 104 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-32.png": {
+      "frame": { "x": 730, "y": 386, "w": 106, "h": 103 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 13, "y": 22, "w": 106, "h": 103 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-33.png": {
+      "frame": { "x": 516, "y": 382, "w": 107, "h": 101 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 13, "y": 23, "w": 107, "h": 101 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-34.png": {
+      "frame": { "x": 826, "y": 286, "w": 107, "h": 98 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 14, "y": 23, "w": 107, "h": 98 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-35.png": {
+      "frame": { "x": 516, "y": 284, "w": 107, "h": 96 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 15, "y": 22, "w": 107, "h": 96 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-36.png": {
+      "frame": { "x": 308, "y": 187, "w": 105, "h": 93 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 17, "y": 22, "w": 105, "h": 93 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-37.png": {
+      "frame": { "x": 1, "y": 281, "w": 103, "h": 95 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 19, "y": 20, "w": 103, "h": 95 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-38.png": {
+      "frame": { "x": 205, "y": 282, "w": 102, "h": 95 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 21, "y": 19, "w": 102, "h": 95 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-39.png": {
+      "frame": { "x": 413, "y": 282, "w": 101, "h": 96 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 21, "y": 18, "w": 101, "h": 96 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-40.png": {
+      "frame": { "x": 309, "y": 282, "w": 102, "h": 95 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 20, "y": 19, "w": 102, "h": 95 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-41.png": {
+      "frame": { "x": 205, "y": 187, "w": 101, "h": 93 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 20, "y": 20, "w": 101, "h": 93 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-42.png": {
+      "frame": { "x": 911, "y": 1, "w": 99, "h": 91 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 21, "y": 21, "w": 99, "h": 91 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-43.png": {
+      "frame": { "x": 709, "y": 1, "w": 98, "h": 90 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 21, "y": 20, "w": 98, "h": 90 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-44.png": {
+      "frame": { "x": 1, "y": 1, "w": 99, "h": 89 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 19, "y": 18, "w": 99, "h": 89 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-45.png": {
+      "frame": { "x": 102, "y": 1, "w": 98, "h": 89 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 18, "y": 17, "w": 98, "h": 89 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-46.png": {
+      "frame": { "x": 1, "y": 92, "w": 99, "h": 91 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 17, "y": 16, "w": 99, "h": 91 },
+      "sourceSize": { "w": 128, "h": 128 }
+    },
+    "asteroid2-47.png": {
+      "frame": { "x": 809, "y": 1, "w": 100, "h": 91 },
+      "rotated": false,
+      "trimmed": true,
+      "spriteSourceSize": { "x": 17, "y": 16, "w": 100, "h": 91 },
+      "sourceSize": { "w": 128, "h": 128 }
+    }
+  },
+  "animations": {
+    "asteroid": [
+      "asteroid2-0.png",
+      "asteroid2-1.png",
+      "asteroid2-2.png",
+      "asteroid2-3.png",
+      "asteroid2-4.png",
+      "asteroid2-5.png",
+      "asteroid2-6.png",
+      "asteroid2-7.png",
+      "asteroid2-8.png",
+      "asteroid2-9.png",
+      "asteroid2-10.png",
+      "asteroid2-11.png",
+      "asteroid2-12.png",
+      "asteroid2-13.png",
+      "asteroid2-14.png",
+      "asteroid2-15.png",
+      "asteroid2-16.png",
+      "asteroid2-17.png",
+      "asteroid2-18.png",
+      "asteroid2-19.png",
+      "asteroid2-20.png",
+      "asteroid2-21.png",
+      "asteroid2-22.png",
+      "asteroid2-23.png",
+      "asteroid2-24.png",
+      "asteroid2-25.png",
+      "asteroid2-26.png",
+      "asteroid2-27.png",
+      "asteroid2-28.png",
+      "asteroid2-29.png",
+      "asteroid2-30.png",
+      "asteroid2-31.png",
+      "asteroid2-32.png",
+      "asteroid2-33.png",
+      "asteroid2-34.png",
+      "asteroid2-35.png",
+      "asteroid2-36.png",
+      "asteroid2-37.png",
+      "asteroid2-38.png",
+      "asteroid2-39.png",
+      "asteroid2-40.png",
+      "asteroid2-41.png",
+      "asteroid2-42.png",
+      "asteroid2-43.png",
+      "asteroid2-44.png",
+      "asteroid2-45.png",
+      "asteroid2-46.png",
+      "asteroid2-47.png"
+    ]
+  },
+  "meta": {
+    "app": "https://www.codeandweb.com/texturepacker",
+    "version": "1.1",
+    "image": "asteroid.png",
+    "format": "RGBA8888",
+    "size": { "w": 1017, "h": 491 },
+    "scale": "1",
+    "smartupdate": "$TexturePacker:SmartUpdate:f56b479bb8f0ccdc624fee164e450f7d:8475ac77b2b969da5d61f09e6756ea0d:fc1275ebf00c1c41e77ba8840fa76592$"
+  }
+}

@@ -4,8 +4,8 @@ export async function createStar(app) {
   const texture = await Assets.load("/src/Space/assets/star.png");
   const star = new Sprite(texture);
 
-  const minSize = 20;
-  const maxSize = 60;
+  const minSize = 10;
+  const maxSize = 40;
   const size = Math.random() * (maxSize - minSize) + minSize;
   star.width = size;
   star.height = size;

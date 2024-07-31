@@ -1,0 +1,48 @@
+{
+  "frames": {
+    "explode-0": {
+      "frame": { "x": 9, "y": 9, "w": 333, "h": 304 }
+    },
+    "explode-1": {
+      "frame": { "x": 360, "y": 0, "w": 333, "h": 304 }
+    },
+    "explode-2": {
+      "frame": { "x": 711, "y": 0, "w": 333, "h": 280 }
+    },
+    "explode-3": {
+      "frame": { "x": 9, "y": 301, "w": 333, "h": 304 }
+    },
+    "explode-4": {
+      "frame": { "x": 360, "y": 281, "w": 333, "h": 304 }
+    },
+    "explode-5": {
+      "frame": { "x": 711, "y": 280, "w": 333, "h": 304 }
+    },
+    "explode-6": {
+      "frame": { "x": 9, "y": 603, "w": 333, "h": 304 }
+    },
+    "explode-7": {
+      "frame": { "x": 331, "y": 653, "w": 333, "h": 304 }
+    },
+    "explode-8": {
+      "frame": { "x": 682, "y": 701, "w": 333, "h": 304 }
+    }
+  },
+  "meta": {
+    "image": "explode.png",
+    "size": { "w": 1024, "h": 1024 }
+  },
+  "animations": {
+    "explode": [
+      "explode-0",
+      "explode-1",
+      "explode-2",
+      "explode-3",
+      "explode-4",
+      "explode-5",
+      "explode-6",
+      "explode-7",
+      "explode-8"
+    ]
+  }
+}

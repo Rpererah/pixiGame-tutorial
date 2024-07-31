@@ -10,5 +10,8 @@ export async function createSpaceship(app) {
   sprite.x = (app.screen.width - sprite.width) / 2;
   sprite.y = app.screen.height - sprite.height;
 
+  sprite.interactive = true;
+  sprite.cursor = "pointer";
+
   return sprite;
 }
