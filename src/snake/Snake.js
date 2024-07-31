@@ -16,8 +16,8 @@ export default class Snake {
     this.tilesetData = tilesetData;
     this.textures = {};
     this.bodySprites = [];
-    this.direction = "right"; // Direção inicial
-    this.nextDirection = "right"; // Próxima direção
+    this.direction = "down"; // Direção inicial
+    this.nextDirection = "down"; // Próxima direção
     this.moveSpeed = 10; // Velocidade de movimentação
     this.isGameOver = false;
 
@@ -66,14 +66,7 @@ export default class Snake {
       }
 
       this.headSprite = new AnimatedSprite(headTextures);
-      this.setupSprite(
-        this.headSprite,
-        this.app.screen.width - 100,
-        this.app.screen.height / 2,
-        0.2
-      );
-      this.headSprite.play();
-      this.app.stage.addChild(this.headSprite);
+      this.setupHeadSprite();
 
       const bodyTexture = spritesheet.textures[snakeParts.body[0]];
       if (!bodyTexture) {
@@ -81,7 +74,7 @@ export default class Snake {
       }
 
       this.bodyTexture = bodyTexture;
-      this.createBodySegment(this.headSprite.x - 5, this.headSprite.y - 40);
+      this.createBodySegment(this.headSprite.x - 20, this.headSprite.y); // Ajusta a posição inicial do corpo
 
       const tailTexture = spritesheet.textures[snakeParts.tail[0]];
       if (!tailTexture) {
@@ -91,10 +84,9 @@ export default class Snake {
       this.tailSprite = new Sprite(tailTexture);
       this.setupSprite(
         this.tailSprite,
-        this.headSprite.x - 4,
-        this.headSprite.y - 50
-      );
-      this.app.stage.addChild(this.tailSprite);
+        this.headSprite.x - 30,
+        this.headSprite.y
+      ); // Ajusta a posição inicial da cauda
       this.flipSpriteVertically(this.tailSprite);
 
       console.log("Sprites criados e adicionados ao stage");
@@ -108,6 +100,22 @@ export default class Snake {
     sprite.y = y;
     sprite.anchor.set(0.5);
     sprite.animationSpeed = animationSpeed;
+  }
+
+  setupHeadSprite() {
+    this.setupSprite(
+      this.headSprite,
+      this.app.screen.width / 2,
+      this.app.screen.height / 2,
+      0.2
+    );
+    this.headSprite.play();
+
+    // Ajusta a cabeça para estar voltada para baixo inicialmente
+    this.headSprite.scale.x = 1;
+    this.headSprite.scale.y = 1;
+    this.headSprite.rotation = Math.PI / 2; // Inicialmente voltado para baixo
+    this.app.stage.addChild(this.headSprite);
   }
 
   flipSpriteHorizontally(sprite) {
@@ -170,31 +178,27 @@ export default class Snake {
 
   moveAll(x, y) {
     if (this.headSprite && this.bodySprites.length > 0 && this.tailSprite) {
+      // Move a cabeça
       const newHeadX = this.headSprite.x + x;
       const newHeadY = this.headSprite.y + y;
-
-      // Atualiza a posição da cabeça
       this.headSprite.x = newHeadX;
       this.headSprite.y = newHeadY;
 
-      // Atualiza a posição dos segmentos do corpo
+      // Move os segmentos do corpo
       let previousSegment = this.headSprite;
       this.bodySprites.forEach((bodySprite, index) => {
-        if (index === 0) {
-          bodySprite.x = previousSegment.x - 5;
-          bodySprite.y = previousSegment.y - 40;
-        } else {
-          const prevBodySprite = this.bodySprites[index - 1];
-          bodySprite.x = prevBodySprite.x;
-          bodySprite.y = prevBodySprite.y - 30;
-        }
-        previousSegment = bodySprite;
+        const prevBodySprite =
+          index === 0 ? this.headSprite : this.bodySprites[index - 1];
+        bodySprite.x = prevBodySprite.x;
+        bodySprite.y = prevBodySprite.y;
       });
 
-      // Atualiza a posição da cauda
-      const lastBodySprite = this.bodySprites[this.bodySprites.length - 1];
-      this.tailSprite.x = lastBodySprite.x;
-      this.tailSprite.y = lastBodySprite.y - 20;
+      // Move a cauda
+      if (this.bodySprites.length > 0) {
+        const lastBodySprite = this.bodySprites[this.bodySprites.length - 1];
+        this.tailSprite.x = lastBodySprite.x;
+        this.tailSprite.y = lastBodySprite.y;
+      }
 
       // Verifica colisões
       this.handleCollision();
@@ -207,6 +211,7 @@ export default class Snake {
     if (this.direction !== this.nextDirection) {
       // Atualiza a direção apenas se for diferente
       this.direction = this.nextDirection;
+      this.updateHeadSprite(); // Atualiza a aparência da cabeça
     }
 
     let x = 0;
@@ -215,15 +220,23 @@ export default class Snake {
     switch (this.direction) {
       case "left":
         x = -this.moveSpeed;
+        this.headSprite.scale.x = -1; // Espelha horizontalmente
+        this.headSprite.rotation = 0; // Garante que a rotação esteja zerada
         break;
       case "right":
         x = this.moveSpeed;
+        this.headSprite.scale.x = 1; // Restaura a escala para normal
+        this.headSprite.rotation = 0; // Garante que a rotação esteja zerada
         break;
       case "up":
         y = -this.moveSpeed;
+        this.headSprite.scale.x = 1; // Restaura a escala para normal
+        this.headSprite.rotation = -Math.PI / 2; // Rotaciona para cima
         break;
       case "down":
         y = this.moveSpeed;
+        this.headSprite.scale.x = 1; // Restaura a escala para normal
+        this.headSprite.rotation = Math.PI / 2; // Rotaciona para baixo
         break;
     }
 
@@ -235,11 +248,28 @@ export default class Snake {
       if (!this.isGameOver) {
         this.moveSnake();
       }
-    }, 100); // Ajuste a taxa de movimento conforme necessário
+    }, 100);
   }
 
   setNextDirection(direction) {
-    this.nextDirection = direction;
+    const oppositeDirections = {
+      left: "right",
+      right: "left",
+      up: "down",
+      down: "up",
+    };
+
+    // Verifica se a nova direção é oposta à atual e não a define se for
+    if (direction !== oppositeDirections[this.direction]) {
+      this.nextDirection = direction;
+    }
+  }
+
+  updateHeadSprite() {
+    // Reseta a escala e rotação da cabeça para o padrão
+    this.headSprite.scale.x = 1;
+    this.headSprite.scale.y = 1;
+    this.headSprite.rotation = Math.PI / 2; // Inicialmente voltado para baixo
   }
 
   endGame() {
@@ -256,6 +286,6 @@ export default class Snake {
     gameOverText.anchor.set(0.5);
     this.app.stage.addChild(gameOverText);
 
-    this.app.renderer.background.color = 0x000000; // Torna o fundo preto
+    this.app.renderer.background.color = 0x000000; // Define a cor de fundo
   }
 }

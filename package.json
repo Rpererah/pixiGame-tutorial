@@ -13,6 +13,7 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@pixi/devtools": "^2.0.1",
     "vite": "^5.3.5"
   },
   "dependencies": {
