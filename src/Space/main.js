@@ -10,7 +10,6 @@ import { createSpaceship } from "./createSpaceship";
 import { shooter } from "./shooter";
 import { createStartScreen } from "./startScreen";
 import { createStar } from "./star";
-import { createComet } from "./createMeteor";
 import { checkCollision } from "./utils/checkCollision";
 import { createExplode } from "./createExplode";
 import { createAsteroid } from "./createAsteroid";
@@ -152,6 +151,7 @@ async function startGameLoop() {
         explode.play();
         mainContainer.removeChild(spaceship);
         clearInterval(shootingIntervalId);
+        asteroidSpeed = 5;
         setTimeout(() => showStartScreen(), 3000);
       }
     );

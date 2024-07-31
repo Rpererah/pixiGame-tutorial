@@ -1,6 +1,6 @@
 import { AnimatedSprite, Assets, Spritesheet } from "pixi.js";
 import asteroidJson from "./assets/asteroid.json";
-export async function createAsteroid(app) {
+export async function createAsteroid(app, velocity) {
   const texture = await Assets.load("/src/Space/assets/asteroid.png");
   const spritesheet = new Spritesheet(texture, asteroidJson);
   await spritesheet.parse();
@@ -21,25 +21,25 @@ export async function createAsteroid(app) {
       animatedSprite.x = Math.random() * app.screen.width;
       animatedSprite.y = -radius;
       animatedSprite.vx = Math.random() * 2 - 1;
-      animatedSprite.vy = Math.random() * 2 + 1;
+      animatedSprite.vy = Math.random() * 2 + 1 * velocity;
       break;
     case 1:
       animatedSprite.x = Math.random() * app.screen.width;
       animatedSprite.y = app.screen.height + radius;
       animatedSprite.vx = Math.random() * 2 - 1;
-      animatedSprite.vy = -Math.random() * 2 - 1;
+      animatedSprite.vy = -Math.random() * 2 - 1 * velocity;
       break;
     case 2:
       animatedSprite.x = -radius;
       animatedSprite.y = Math.random() * app.screen.height;
       animatedSprite.vx = Math.random() * 2 + 1;
-      animatedSprite.vy = Math.random() * 2 - 1;
+      animatedSprite.vy = Math.random() * 2 - 1 * velocity;
       break;
     case 3:
       animatedSprite.x = app.screen.width + radius;
       animatedSprite.y = Math.random() * app.screen.height;
       animatedSprite.vx = -Math.random() * 2 - 1;
-      animatedSprite.vy = Math.random() * 2 - 1;
+      animatedSprite.vy = Math.random() * 2 - 1 * velocity;
       break;
   }
 
@@ -58,25 +58,25 @@ export async function createAsteroid(app) {
           animatedSprite.x = Math.random() * app.screen.width;
           animatedSprite.y = -radius;
           animatedSprite.vx = Math.random() * 2 - 1;
-          animatedSprite.vy = Math.random() * 2 + 1;
+          animatedSprite.vy = Math.random() * 2 + 1 * velocity;
           break;
         case 1:
           animatedSprite.x = Math.random() * app.screen.width;
           animatedSprite.y = app.screen.height + radius;
           animatedSprite.vx = Math.random() * 2 - 1;
-          animatedSprite.vy = -Math.random() * 2 - 1;
+          animatedSprite.vy = -Math.random() * 2 - 1 * velocity;
           break;
         case 2:
           animatedSprite.x = -radius;
           animatedSprite.y = Math.random() * app.screen.height;
           animatedSprite.vx = Math.random() * 2 + 1;
-          animatedSprite.vy = Math.random() * 2 - 1;
+          animatedSprite.vy = Math.random() * 2 - 1 * velocity;
           break;
         case 3:
           animatedSprite.x = app.screen.width + radius;
           animatedSprite.y = Math.random() * app.screen.height;
           animatedSprite.vx = -Math.random() * 2 - 1;
-          animatedSprite.vy = Math.random() * 2 - 1;
+          animatedSprite.vy = Math.random() * 2 - 1 * velocity;
           break;
       }
     }
