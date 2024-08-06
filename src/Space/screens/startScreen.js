@@ -1,14 +1,29 @@
 import { Container, Text, TextStyle, Graphics } from "pixi.js";
+import { Howl } from "howler";
+import openingSound from "./../assets/opening.ogg";
+import { createOpeningBackground } from "../sprites/openingBackground";
+const sound = new Howl({
+  src: [openingSound],
+});
 
-export function createStartScreen(app, onStartGame) {
+sound.play(); //por limitacoes do navegador o som so ira tocar quando houver algum click na tela ou acao
+export async function createStartScreen(app, onStartGame) {
+  const openingContainer = new Container();
+  app.stage.addChild(openingContainer);
+  const background = await createOpeningBackground(app);
+  openingContainer.addChild(background.backgroundSprite1);
+  openingContainer.addChild(background.backgroundSprite2);
+
   const startContainer = new Container();
   app.stage.addChild(startContainer);
 
   const titleStyle = new TextStyle({
-    fontFamily: "Arial",
+    fontFamily: "Times",
     fontSize: 64,
     fill: 0xffffff,
     align: "center",
+    stroke: 0x000000,
+    strokeThickness: 12,
   });
 
   const title = new Text({ text: "Spacezin Rpererah", style: titleStyle });
@@ -36,7 +51,10 @@ export function createStartScreen(app, onStartGame) {
   button.x = app.screen.width / 2 - button.width / 2;
   button.y = app.screen.height / 2 + 50;
 
-  button.on("pointerdown", onStartGame);
+  button.on("pointerdown", () => {
+    sound.pause();
+    onStartGame();
+  });
   startContainer.addChild(button);
 
   return startContainer;

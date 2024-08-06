@@ -24,13 +24,13 @@ async function init() {
   });
   document.body.appendChild(app.canvas);
 
-  showStartScreen();
+  await showStartScreen();
 }
 
-export function showStartScreen() {
+export async function showStartScreen() {
   app.stage.removeChildren();
 
-  const startScreen = createStartScreen(app, startGame);
+  const startScreen = await createStartScreen(app, startGame);
 
   app.stage.addChild(startScreen);
 
