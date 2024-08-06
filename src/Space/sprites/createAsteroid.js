@@ -1,5 +1,5 @@
 import { AnimatedSprite, Assets, Spritesheet } from "pixi.js";
-import asteroidJson from "./assets/asteroid.json";
+import asteroidJson from "../assets/asteroid.json";
 export async function createAsteroid(app, velocity) {
   const texture = await Assets.load("/src/Space/assets/asteroid.png");
   const spritesheet = new Spritesheet(texture, asteroidJson);

@@ -1,9 +1,9 @@
-import { createExplode } from "../createExplode";
-import { checkCollision } from "./checkCollision";
 import { Howl } from "howler";
 import explosioWav from "./../assets/explosion.wav";
 import winWav from "./../assets/win.wav";
 import loseWav from "./../assets/lose.wav";
+import { checkCollision } from "./checkCollision";
+import { createExplode } from "../sprites/createExplode";
 export function setupTicker(
   app,
   spaceship,

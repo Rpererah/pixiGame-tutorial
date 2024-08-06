@@ -1,4 +1,4 @@
-import { createAsteroid } from "../createAsteroid";
+import { createAsteroid } from "../sprites/createAsteroid";
 
 export async function generateAsteroids(
   app,

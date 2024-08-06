@@ -1,4 +1,3 @@
-// utils.js
 export function checkCollision(obj1, obj2) {
   const obj1Bounds = obj1.getBounds();
   const obj2Bounds = obj2.getBounds();

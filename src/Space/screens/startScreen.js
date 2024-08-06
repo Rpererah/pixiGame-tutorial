@@ -1,4 +1,4 @@
-import { Application, Container, Text, TextStyle, Graphics } from "pixi.js";
+import { Container, Text, TextStyle, Graphics } from "pixi.js";
 
 export function createStartScreen(app, onStartGame) {
   const startContainer = new Container();

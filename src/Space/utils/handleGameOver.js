@@ -1,4 +1,4 @@
-import { createExplode } from "../createExplode";
+import { createExplode } from "../sprites/createExplode";
 
 export async function handleGameOver(app, spaceship, autoShooting, onComplete) {
   spaceship.hasExploded = true;

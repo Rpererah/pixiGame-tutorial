@@ -1,8 +1,8 @@
 import { Application, Container } from "pixi.js";
-import { createSpaceship } from "./createSpaceship";
-import { shooter } from "./shooter";
-import { createStartScreen } from "./startScreen";
-import { createBackground } from "./createBackground";
+import { createSpaceship } from "./sprites/createSpaceship";
+import { shooter } from "./sprites/shooter";
+import { createStartScreen } from "./screens/startScreen";
+import { createBackground } from "./sprites/createBackground";
 import { autoShoot } from "./utils/autoShooting";
 import { showTransitionScreen } from "./utils/showTransitionScreen";
 import { generateStars } from "./utils/generateStars";

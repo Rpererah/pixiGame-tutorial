@@ -1,4 +1,4 @@
-import { createStar } from "../star";
+import { createStar } from "../sprites/star";
 
 export async function generateStars(app, container) {
   const numStars = Math.random() * 20;

@@ -1,4 +1,4 @@
-import { Assets, Graphics, Sprite } from "pixi.js";
+import { Assets, Sprite } from "pixi.js";
 
 export async function createSpaceship(app) {
   const texture = await Assets.load("/src/Space/assets/spaceship.png");

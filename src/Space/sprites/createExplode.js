@@ -1,5 +1,5 @@
 import { AnimatedSprite, Assets, Spritesheet } from "pixi.js";
-import explodeJson from "./assets/explode.json";
+import explodeJson from "../assets/explode.json";
 
 export async function createExplode(app, height, width, repeat = 2) {
   const texture = await Assets.load("/src/Space/assets/explode.png");
