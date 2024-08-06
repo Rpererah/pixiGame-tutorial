@@ -18,5 +18,5 @@ export function showTransitionScreen(app, message, onTransitionComplete) {
   setTimeout(() => {
     app.stage.removeChild(transitionScreen);
     onTransitionComplete();
-  }, 3000);
+  }, 4000);
 }

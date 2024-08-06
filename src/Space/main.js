@@ -2,15 +2,13 @@ import { Application, Container } from "pixi.js";
 import { createSpaceship } from "./createSpaceship";
 import { shooter } from "./shooter";
 import { createStartScreen } from "./startScreen";
-import { createStar } from "./star";
-import { checkCollision } from "./utils/checkCollision";
-import { createExplode } from "./createExplode";
-import { createAsteroid } from "./createAsteroid";
 import { createBackground } from "./createBackground";
 import { autoShoot } from "./utils/autoShooting";
 import { showTransitionScreen } from "./utils/showTransitionScreen";
 import { generateStars } from "./utils/generateStars";
 import { generateAsteroids } from "./utils/generateAsteroids";
+import { handleGameOver } from "./utils/handleGameOver";
+import { setupTicker } from "./utils/setupTicker";
 
 //a hieraquia dos container funciona na ordem de criacao e eles vao se sobrepondo
 
@@ -29,7 +27,7 @@ async function init() {
   showStartScreen();
 }
 
-function showStartScreen() {
+export function showStartScreen() {
   app.stage.removeChildren();
 
   const startScreen = createStartScreen(app, startGame);
@@ -80,72 +78,9 @@ async function startGameLoop() {
     mousePosition.y = event.clientY - rect.top;
   });
 
-  app.ticker.add(() => {
-    // Suaviza o movimento da navinha
-    const speed = 0.1;
-
-    spaceship.x += (mousePosition.x - spaceship.x) * speed;
-    spaceship.y += (mousePosition.y - spaceship.y) * speed;
-
-    projectiles.forEach((projectile) => {
-      projectile.x += projectile.vx;
-      projectile.y += projectile.vy;
-
-      comets.forEach((comet) => {
-        if (checkCollision(projectile, comet)) {
-          createExplode(app, comet.height, comet.width).then((explode) => {
-            explode.x = comet.x;
-            explode.y = comet.y;
-            explode.play();
-            mainContainer.removeChild(comet);
-            comets.splice(comets.indexOf(comet), 1);
-            mainContainer.removeChild(projectile);
-            projectiles.splice(projectiles.indexOf(projectile), 1);
-            if (comets.length < 1) {
-              showTransitionScreen(
-                app,
-                `Fase ${difficultyLevel + 1}`,
-                nextPhase
-              );
-            }
-          });
-        }
-      });
-
-      comets.forEach((comet) => {
-        if (checkCollision(spaceship, comet) && !spaceship.hasExploded) {
-          spaceship.hasExploded = true;
-          createExplode(app, spaceship.height, spaceship.width).then(
-            (explode) => {
-              explode.x = spaceship.x;
-              explode.y = spaceship.y;
-              explode.play();
-              mainContainer.removeChild(spaceship);
-              clearInterval(shootingIntervalId);
-              handleGameOver();
-            }
-          );
-        }
-      });
-    });
-  });
-
-  async function handleGameOver() {
-    spaceship.hasExploded = true;
-    await createExplode(app, spaceship.height, spaceship.width).then(
-      (explode) => {
-        explode.x = spaceship.x;
-        explode.y = spaceship.y;
-        explode.play();
-        mainContainer.removeChild(spaceship);
-        autoShooting.stop();
-        asteroidSpeed = 5;
-        setTimeout(() => showStartScreen(), 3000);
-      }
-    );
+  async function handleSpaceshipCollision() {
+    return await handleGameOver(app, spaceship, autoShooting, showStartScreen);
   }
-
-  let shootingIntervalId;
 
   const autoShooting = autoShoot(
     spaceship,
@@ -153,16 +88,29 @@ async function startGameLoop() {
     shooter,
     projectiles
   );
-  autoShooting.start();
 
   function nextPhase() {
     difficultyLevel++;
     asteroidSpeed += 10;
     maxAsteroids += 2;
+
     generateAsteroids(app, mainContainer, comets, asteroidSpeed, maxAsteroids);
   }
 
-  autoShoot();
+  setupTicker(
+    app,
+    spaceship,
+    comets,
+    projectiles,
+    mainContainer,
+    showTransitionScreen,
+    difficultyLevel,
+    nextPhase,
+    handleSpaceshipCollision,
+    mousePosition
+  );
+
+  autoShooting.start();
 }
 
 await init();
