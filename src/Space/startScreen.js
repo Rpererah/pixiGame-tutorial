@@ -25,14 +25,14 @@ export function createStartScreen(app, onStartGame) {
 
   const buttonText = new Text({ text: "Start Game", style: buttonStyle });
   const button = new Graphics();
-  button.fill({ color: 0xff0000 });
   button.roundRect(0, 0, buttonText.width + 20, buttonText.height + 10, 8);
+  button.fill({ color: 0xff0000 });
   button.addChild(buttonText);
   buttonText.x = 10;
   buttonText.y = 5;
 
   button.interactive = true;
-  button.buttonMode = true;
+  button.cursor = "pointer";
   button.x = app.screen.width / 2 - button.width / 2;
   button.y = app.screen.height / 2 + 50;
 

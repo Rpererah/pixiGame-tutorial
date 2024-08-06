@@ -1,11 +1,4 @@
-import {
-  Application,
-  Assets,
-  Container,
-  Sprite,
-  Text,
-  TextStyle,
-} from "pixi.js";
+import { Application, Container } from "pixi.js";
 import { createSpaceship } from "./createSpaceship";
 import { shooter } from "./shooter";
 import { createStartScreen } from "./startScreen";
@@ -13,6 +6,11 @@ import { createStar } from "./star";
 import { checkCollision } from "./utils/checkCollision";
 import { createExplode } from "./createExplode";
 import { createAsteroid } from "./createAsteroid";
+import { createBackground } from "./createBackground";
+import { autoShoot } from "./utils/autoShooting";
+import { showTransitionScreen } from "./utils/showTransitionScreen";
+import { generateStars } from "./utils/generateStars";
+import { generateAsteroids } from "./utils/generateAsteroids";
 
 //a hieraquia dos container funciona na ordem de criacao e eles vao se sobrepondo
 
@@ -52,21 +50,13 @@ async function startGameLoop() {
   containerBackground.height = app.screen.height;
   app.stage.addChild(containerBackground);
 
-  Assets.load("/src/Space/assets/background.jpg").then((texture) => {
-    const background = new Sprite(texture);
-    background.width = app.screen.width;
-    background.height = app.screen.height;
-    containerBackground.addChild(background);
-  });
+  const background = await createBackground(app);
+  containerBackground.addChild(background);
 
   const mainContainer = new Container();
   app.stage.addChild(mainContainer);
 
-  const numStars = Math.random() * 20;
-  for (let i = 0; i < numStars; i++) {
-    const star = await createStar(app);
-    mainContainer.addChild(star);
-  }
+  generateStars(app, mainContainer);
 
   const spaceship = await createSpaceship(app);
   spaceship.hasExploded = false;
@@ -74,19 +64,13 @@ async function startGameLoop() {
 
   const comets = [];
 
-  async function spawnComets() {
-    comets.forEach((comet) => mainContainer.removeChild(comet));
-    comets.length = 0;
-
-    const numComets = maxAsteroids;
-    for (let i = 0; i < numComets; i++) {
-      const comet = await createAsteroid(app, asteroidSpeed);
-      mainContainer.addChild(comet);
-      comets.push(comet);
-    }
-  }
-
-  spawnComets();
+  await generateAsteroids(
+    app,
+    mainContainer,
+    comets,
+    asteroidSpeed,
+    maxAsteroids
+  );
 
   const mousePosition = { x: app.screen.width / 2, y: app.screen.height / 2 };
 
@@ -118,7 +102,11 @@ async function startGameLoop() {
             mainContainer.removeChild(projectile);
             projectiles.splice(projectiles.indexOf(projectile), 1);
             if (comets.length < 1) {
-              showTransitionScreen(`Fase ${difficultyLevel}`);
+              showTransitionScreen(
+                app,
+                `Fase ${difficultyLevel + 1}`,
+                nextPhase
+              );
             }
           });
         }
@@ -150,7 +138,7 @@ async function startGameLoop() {
         explode.y = spaceship.y;
         explode.play();
         mainContainer.removeChild(spaceship);
-        clearInterval(shootingIntervalId);
+        autoShooting.stop();
         asteroidSpeed = 5;
         setTimeout(() => showStartScreen(), 3000);
       }
@@ -159,43 +147,19 @@ async function startGameLoop() {
 
   let shootingIntervalId;
 
-  function autoShoot() {
-    shootingIntervalId = setInterval(() => {
-      if (!spaceship.hasExploded) {
-        const projectile = shooter(spaceship, mainContainer);
-        projectiles.push(projectile);
-      } else {
-        clearInterval(shootingIntervalId);
-      }
-    }, 1000);
-  }
-
-  function showTransitionScreen(message) {
-    const transitionScreen = new Container();
-    const style = new TextStyle({
-      fontSize: 48,
-      fill: "#ffffff",
-      align: "center",
-    });
-
-    const text = new Text(message, style);
-    text.anchor.set(0.5);
-    text.x = app.screen.width / 2;
-    text.y = app.screen.height / 2;
-    transitionScreen.addChild(text);
-    app.stage.addChild(transitionScreen);
-
-    setTimeout(() => {
-      app.stage.removeChild(transitionScreen);
-      nextPhase();
-    }, 3000);
-  }
+  const autoShooting = autoShoot(
+    spaceship,
+    mainContainer,
+    shooter,
+    projectiles
+  );
+  autoShooting.start();
 
   function nextPhase() {
     difficultyLevel++;
     asteroidSpeed += 10;
     maxAsteroids += 2;
-    spawnComets();
+    generateAsteroids(app, mainContainer, comets, asteroidSpeed, maxAsteroids);
   }
 
   autoShoot();

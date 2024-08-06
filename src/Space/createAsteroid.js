@@ -6,7 +6,6 @@ export async function createAsteroid(app, velocity) {
   await spritesheet.parse();
   const animatedSprite = new AnimatedSprite(spritesheet.animations.asteroid);
   const size = Math.random() * 50 + 100;
-  app.stage.addChild(animatedSprite);
   animatedSprite.play();
   animatedSprite.animationSpeed = 0.24;
   animatedSprite.anchor = 0.5;
