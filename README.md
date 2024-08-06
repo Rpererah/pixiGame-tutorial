@@ -2,26 +2,6 @@
 
 Este projeto é uma aplicação de jogo simples utilizando Pixi.js. O objetivo é fornecer uma base para o treinamento e desenvolvimento de jogos com Pixi.js. Você pode executar o jogo facilmente e trocar entre diferentes jogos modificando o script no arquivo HTML.
 
-## Estrutura do Projeto
-
-project-root/
-│
-├── dist/ # Diretório para arquivos de build
-├── node_modules/ # Dependências do projeto
-├── package.json # Gerenciador de dependências e scripts
-├── package-lock.json # Versões exatas das dependências
-├── src/ # Código-fonte do projeto
-│ ├── Flappy/ # Pasta para o jogo Flappy
-│ ├── Pick/ # Pasta para o jogo Pick
-│ ├── Space/ # Pasta para o jogo Space
-│ ├── assets/ # Recursos estáticos (imagens, sons, etc.)
-│ └── teste/ # Pasta para testes
-├── index.html # Arquivo HTML principal
-└── vite.config.js # Configuração do Vite
-
-bash
-Copiar código
-
 ## Requisitos
 
 Certifique-se de ter o [Node.js](https://nodejs.org/) instalado em sua máquina. Você também precisará do [npm](https://www.npmjs.com/) para instalar as dependências.
