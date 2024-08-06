@@ -1,0 +1,31 @@
+{"frames": {
+
+"frame-1.png":
+{
+	"frame": {"x":1,"y":609,"w":704,"h":528},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":18,"w":704,"h":528},
+	"sourceSize": {"w":716,"h":632}
+},
+"frame-2.png":
+{
+	"frame": {"x":1,"y":1,"w":704,"h":606},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":8,"y":18,"w":704,"h":606},
+	"sourceSize": {"w":716,"h":632}
+}},
+"animations": {
+	"frame": ["frame-1.png","frame-2.png"]
+},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.1",
+	"image": "passarinho.png",
+	"format": "RGBA8888",
+	"size": {"w":706,"h":1138},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:9cec72d70546933a6dff23658ecbb1bc:2116edc03b850905f4bc5810e094c161:bb8fb971dc68adf9a65e1a270aa732eb$"
+}
+}
