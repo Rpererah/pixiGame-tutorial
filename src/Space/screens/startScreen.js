@@ -11,8 +11,7 @@ export async function createStartScreen(app, onStartGame) {
   const openingContainer = new Container();
   app.stage.addChild(openingContainer);
   const background = await createOpeningBackground(app);
-  openingContainer.addChild(background.backgroundSprite1);
-  openingContainer.addChild(background.backgroundSprite2);
+  openingContainer.addChild(background.tilingSprite);
 
   const startContainer = new Container();
   app.stage.addChild(startContainer);
