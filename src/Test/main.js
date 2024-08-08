@@ -16,10 +16,10 @@ import {
   document.body.appendChild(app.canvas);
 
   await Assets.load([
-    "src/Slot/assets/cherry.png",
-    "src/Slot/assets/galaxy.png",
-    "src/Slot/assets/pikachu.png",
-    "src/Slot/assets/seven.png",
+    "src/Slot/assets/slot-1.png",
+    "src/Slot/assets/slot-2.png",
+    "src/Slot/assets/slot-5.png",
+    "src/Slot/assets/slot-4.png",
     "src/Slot/assets/background.png",
     "src/Slot/assets/background/background-1.png",
     "src/Slot/assets/background/background-2.png",
@@ -52,24 +52,25 @@ import {
     bgSprite.y = i * bgSprite.height;
     backgroundContainer.addChild(bgSprite);
   }
-
   const REEL_WIDTH = 100;
   const SYMBOL_SIZE = 90;
 
   const slotTextures = [
-    { texture: Texture.from("src/Slot/assets/cherry.png"), label: "cherry" },
-    { texture: Texture.from("src/Slot/assets/galaxy.png"), label: "galaxy" },
-    { texture: Texture.from("src/Slot/assets/pikachu.png"), label: "pikachu" },
-    { texture: Texture.from("src/Slot/assets/seven.png"), label: "seven" },
+    Texture.from("src/Slot/assets/slot-1.png"),
+    Texture.from("src/Slot/assets/slot-2.png"),
+    Texture.from("src/Slot/assets/slot-5.png"),
+    Texture.from("src/Slot/assets/slot-4.png"),
   ];
 
   // Build the reels
+
   const reels = [];
   const reelContainer = new Container();
 
   for (let i = 0; i < 3; i++) {
     const rc = new Container();
-    rc.x = i * (REEL_WIDTH + 90); // Entre os rolos
+
+    rc.x = i * (REEL_WIDTH + 90); //entre os rolos
     reelContainer.addChild(rc);
 
     const reel = {
@@ -85,78 +86,29 @@ import {
     rc.filters = [reel.blur];
 
     // Build the symbols
-    for (let j = 0; j < 3; j++) {
-      const symbolInfo =
-        slotTextures[Math.floor(Math.random() * slotTextures.length)];
-      const symbolTexture = symbolInfo.texture;
-      const symbolLabel = symbolInfo.label;
+    for (let j = 0; j < 5; j++) {
+      const symbol = new Sprite(
+        slotTextures[Math.floor(Math.random() * slotTextures.length)]
+      );
 
-      const symbol = new Sprite(symbolTexture);
+      symbol.y = j * SYMBOL_SIZE;
       symbol.scale.set(
         SYMBOL_SIZE / symbol.texture.width,
         SYMBOL_SIZE / symbol.texture.height
       );
 
-      // Organize vertical positions
-      symbol.y = j * SYMBOL_SIZE;
-      symbol.x = Math.round(REEL_WIDTH - symbol.width) / 2; // Centraliza horizontalmente
-      symbol.label = symbolLabel; // Atribui o rótulo ao sprite
+      symbol.x = Math.round(SYMBOL_SIZE - symbol.width) - 10; // x inicial
       reel.symbols.push(symbol);
       rc.addChild(symbol);
     }
-
     reels.push(reel);
   }
-
   app.stage.addChild(reelContainer);
-
-  function checkWinningCondition(stage) {
-    const reelResults = [];
-
-    reels.forEach((reel, reelIndex) => {
-      reel.symbols.forEach((sprite) => {
-        reelResults.push({
-          reelIndex,
-          spriteLabel: sprite.label,
-          x: sprite.x,
-          y: sprite.y,
-        });
-      });
-    });
-
-    // Ordena os resultados pela coordenada y
-    reelResults.sort((a, b) => a.y - b.y);
-
-    console.log("Slot Positions:", reelResults);
-
-    const targetX = 5;
-    const targetY = 15;
-    const tolerance = 2;
-
-    const filteredResults = reelResults.filter(
-      (result) =>
-        Math.abs(result.x - targetX) < tolerance &&
-        Math.abs(result.y - targetY) < tolerance
-    );
-
-    const labelCount = filteredResults.reduce((acc, result) => {
-      acc[result.spriteLabel] = (acc[result.spriteLabel] || 0) + 1;
-      return acc;
-    }, {});
-
-    for (const [label, count] of Object.entries(labelCount)) {
-      if (count >= 3) {
-        console.log("ganhou");
-        return;
-      }
-    }
-
-    console.log("Não ganhou");
-  }
 
   const margin = (app.screen.height - SYMBOL_SIZE * 3) / 2;
 
-  reelContainer.y = margin + 20;
+  //ponto inicial do Y
+  reelContainer.y = margin - 80;
   reelContainer.x = Math.round(app.screen.width - REEL_WIDTH * 5) - 130;
 
   const topOverlayTexture = Texture.from(
@@ -181,10 +133,10 @@ import {
 
     overlaySprite.x = 0;
     overlaySprite.y = overlaySprite.height * index;
-    app.stage.addChild(overlaySprite);
+    app.stage.addChild(overlaySprite); // Adiciona sobre o fundo
   }
 
-  app.stage.interactive = true;
+  app.stage.interactive = true; // Torna o stage interativo ou nem roda sem isso!
   app.stage.cursor = "pointer";
 
   app.stage.on("pointerdown", () => {
@@ -217,8 +169,6 @@ import {
 
   function reelsComplete() {
     running = false;
-
-    checkWinningCondition();
   }
 
   app.ticker.add(() => {
@@ -229,6 +179,7 @@ import {
 
       for (let j = 0; j < r.symbols.length; j++) {
         const s = r.symbols[j];
+        //espacamento entre sprites
         s.y =
           ((r.position + j) % r.symbols.length) * (SYMBOL_SIZE + 15) -
           SYMBOL_SIZE;
@@ -243,6 +194,7 @@ import {
     }
   });
 
+  //doc.pixijs: Very simple tweening utility function. This should be replaced with a proper tweening library in a real product.
   const tweening = [];
 
   function tweenTo(
@@ -270,7 +222,6 @@ import {
 
     return tween;
   }
-
   app.ticker.add(() => {
     const now = Date.now();
     const remove = [];
@@ -303,29 +254,4 @@ import {
   function backout(amount) {
     return (t) => --t * t * ((amount + 1) * t + amount) + 1;
   }
-
-  let count = 0;
-
-  function updateCount(increment) {
-    count += increment;
-
-    if (count > 2) {
-      count = 0;
-    } else if (count < 0) {
-      count = 2;
-    }
-  }
-
-  function handleKeyDown(event) {
-    switch (event.key) {
-      case "ArrowUp":
-        updateCount(1);
-        break;
-      case "ArrowDown":
-        updateCount(-1);
-        break;
-    }
-  }
-
-  document.addEventListener("keydown", handleKeyDown);
 })();

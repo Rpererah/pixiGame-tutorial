@@ -17,7 +17,9 @@
     "vite": "^5.3.5"
   },
   "dependencies": {
+    "@tweenjs/tween.js": "^25.0.0",
     "howler": "^2.2.4",
+    "pixi-tween": "^0.2.0",
     "pixi.js": "^8.2.5"
   }
 }
