@@ -367,6 +367,27 @@ import {
 
   let count = 0;
 
+  //eh amarelo errei a cor arrumar depois
+  const littlegreen = new Graphics();
+  littlegreen
+    .roundRect(130, 20, 28, 5, 15)
+    .fill({ color: 0xf8f000, alpha: 0.7 });
+
+  // Definindo a rotação para 45 graus
+  littlegreen.rotation = Math.PI / 6;
+
+  app.stage.addChild(littlegreen);
+
+  const littlegreen2 = new Graphics();
+  littlegreen2
+    .roundRect(500, 0, 28, 100, 125)
+    .fill({ color: 0xf8f000, alpha: 0.7 });
+
+  // Definindo a rotação para 45 graus
+  littlegreen2.rotation = Math.PI / 4;
+
+  app.stage.addChild(littlegreen2);
+
   //teste de ligar
   // Função para adicionar gráficos amarelos
   function addGraphicsYellow() {
