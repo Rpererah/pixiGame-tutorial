@@ -100,7 +100,7 @@ import {
       // Organize vertical positions
       symbol.y = j * SYMBOL_SIZE;
       symbol.x = Math.round(REEL_WIDTH - symbol.width) / 2; // Centraliza horizontalmente
-      symbol.label = symbolLabel; // Atribui o rótulo ao sprite
+      symbol.label = symbolLabel; //nome
       reel.symbols.push(symbol);
       rc.addChild(symbol);
     }
@@ -110,7 +110,7 @@ import {
 
   app.stage.addChild(reelContainer);
 
-  function checkWinningCondition(stage) {
+  function checkWinningCondition() {
     const reelResults = [];
 
     reels.forEach((reel, reelIndex) => {
@@ -130,28 +130,55 @@ import {
     console.log("Slot Positions:", reelResults);
 
     const targetX = 5;
-    const targetY = 15;
     const tolerance = 2;
 
-    const filteredResults = reelResults.filter(
-      (result) =>
-        Math.abs(result.x - targetX) < tolerance &&
-        Math.abs(result.y - targetY) < tolerance
-    );
-
-    const labelCount = filteredResults.reduce((acc, result) => {
-      acc[result.spriteLabel] = (acc[result.spriteLabel] || 0) + 1;
-      return acc;
-    }, {});
-
-    for (const [label, count] of Object.entries(labelCount)) {
-      if (count >= 3) {
-        console.log("ganhou");
-        return;
+    function getLinesForCount(count) {
+      switch (count) {
+        case 0:
+          return [15]; // Linha única
+        case 1:
+          return [-90, 15, 120]; // verifica as 3 linhas
+        case 2:
+          return [-90, 15, 120];
+        default:
+          return [15];
       }
     }
 
-    console.log("Não ganhou");
+    const lines = getLinesForCount(count);
+
+    let winningLine = null;
+    let winningLabel = null;
+
+    for (const line of lines) {
+      const filteredResults = reelResults.filter(
+        (result) =>
+          Math.abs(result.x - targetX) < tolerance &&
+          Math.abs(result.y - line) < tolerance
+      );
+
+      const labelCount = filteredResults.reduce((acc, result) => {
+        acc[result.spriteLabel] = (acc[result.spriteLabel] || 0) + 1;
+        return acc;
+      }, {});
+
+      for (const [label, count] of Object.entries(labelCount)) {
+        if (count >= 3) {
+          winningLine = line;
+          winningLabel = label;
+          console.log(
+            `Ganhou na linha y=${line} com o rótulo do sprite: ${label}`
+          );
+          break;
+        }
+      }
+
+      if (winningLine) break;
+    }
+
+    if (!winningLine) {
+      console.log("Não ganhou");
+    }
   }
 
   const margin = (app.screen.height - SYMBOL_SIZE * 3) / 2;
@@ -308,6 +335,7 @@ import {
 
   function updateCount(increment) {
     count += increment;
+    console.log("Atualizando count para:", count);
 
     if (count > 2) {
       count = 0;
