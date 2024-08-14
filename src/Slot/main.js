@@ -5,6 +5,7 @@ import {
   Texture,
   Sprite,
   BlurFilter,
+  Graphics,
 } from "pixi.js";
 
 (async () => {
@@ -134,12 +135,12 @@ import {
 
     function getLinesForCount(count) {
       switch (count) {
-        case 0:
-          return [15]; // Linha única
         case 1:
-          return [-90, 15, 120]; // verifica as 3 linhas
+          return [15]; // Linha única
         case 2:
-          return [-90, 15, 120];
+          return [-90, 15, 120]; // Verifica as 3 linhas horizontais
+        case 3:
+          return [-90, 15, 120]; // Inclui linhas horizontais e diagonais
         default:
           return [15];
       }
@@ -150,6 +151,7 @@ import {
     let winningLine = null;
     let winningLabel = null;
 
+    // Verifica linhas horizontais
     for (const line of lines) {
       const filteredResults = reelResults.filter(
         (result) =>
@@ -164,16 +166,48 @@ import {
 
       for (const [label, count] of Object.entries(labelCount)) {
         if (count >= 3) {
-          winningLine = line;
+          winningLine = `Linha y=${line}`;
           winningLabel = label;
           console.log(
-            `Ganhou na linha y=${line} com o rótulo do sprite: ${label}`
+            `Ganhou na ${winningLine} com o rótulo do sprite: ${label}`
           );
           break;
         }
       }
 
       if (winningLine) break;
+    }
+
+    // Função para verificar diagonais, chamada somente se count for 2
+    function checkDiagonals() {
+      const diagonals = [
+        { positions: [0, 4, 8], name: "Diagonal 1" },
+        { positions: [2, 4, 6], name: "Diagonal 2" },
+      ];
+
+      for (const diagonal of diagonals) {
+        const resultsOnDiagonal = diagonal.positions.map(
+          (index) => reelResults[index]
+        );
+
+        const allSameLabel = resultsOnDiagonal.every(
+          (result) =>
+            result && result.spriteLabel === resultsOnDiagonal[0].spriteLabel
+        );
+
+        if (allSameLabel) {
+          winningLine = diagonal.name;
+          winningLabel = resultsOnDiagonal[0].spriteLabel;
+          console.log(
+            `Ganhou na ${winningLine} com o rótulo do sprite: ${winningLabel}`
+          );
+          return;
+        }
+      }
+    }
+
+    if (count === 2) {
+      checkDiagonals();
     }
 
     if (!winningLine) {
@@ -333,14 +367,118 @@ import {
 
   let count = 0;
 
+  //teste de ligar
+  // Função para adicionar gráficos amarelos
+  function addGraphicsYellow() {
+    if (!globalThis.yellowGraphics) {
+      globalThis.yellowGraphics = [];
+
+      const yellowGraphicsData = [
+        { x: 35, y: 70 },
+        { x: 35, y: 415 },
+        { x: 715, y: 415 },
+        { x: 715, y: 70 },
+      ];
+
+      yellowGraphicsData.forEach((data) => {
+        const roundedRectangle = new Graphics();
+        roundedRectangle
+          .roundRect(data.x, data.y, 50, 15, 15)
+          .fill({ color: 0xf8f000, alpha: 0.7 });
+        app.stage.addChild(roundedRectangle);
+        globalThis.yellowGraphics.push(roundedRectangle);
+      });
+    }
+  }
+
+  // Função para adicionar gráficos verdes
+  function addGraphicsGreen() {
+    if (!globalThis.greenGraphics) {
+      globalThis.greenGraphics = [];
+
+      const greenGraphicsData = [
+        { x: 35, y: 142 },
+        { x: 35, y: 342 },
+        { x: 717, y: 342 },
+        { x: 717, y: 142 },
+      ];
+
+      greenGraphicsData.forEach((data) => {
+        const roundedRectangle = new Graphics();
+        roundedRectangle
+          .roundRect(data.x, data.y, 48, 15, 15)
+          .fill({ color: 0x66e5a4, alpha: 0.7 });
+        app.stage.addChild(roundedRectangle);
+        globalThis.greenGraphics.push(roundedRectangle);
+      });
+    }
+  }
+
+  function addGraphicsBlue() {
+    if (!globalThis.blueGraphics) {
+      globalThis.blueGraphics = [];
+
+      const blueGraphicsData = [
+        { x: 35, y: 242 },
+        { x: 717, y: 242 },
+      ];
+
+      blueGraphicsData.forEach((data) => {
+        const roundedRectangleBlue = new Graphics();
+        roundedRectangleBlue
+          .roundRect(data.x, data.y, 48, 15, 15)
+          .fill({ color: 0x7a7aff, alpha: 0.4 });
+        app.stage.addChild(roundedRectangleBlue);
+        globalThis.blueGraphics.push(roundedRectangleBlue);
+      });
+    }
+  }
+
+  // Função para remover gráficos
+  function removeGraphics(graphics) {
+    if (graphics) {
+      graphics.forEach((graphic) => {
+        app.stage.removeChild(graphic);
+      });
+    }
+  }
+
+  // Atualiza os gráficos com base no valor de count
   function updateCount(increment) {
     count += increment;
     console.log("Atualizando count para:", count);
 
-    if (count > 2) {
+    if (count > 3) {
       count = 0;
     } else if (count < 0) {
-      count = 2;
+      count = 3;
+    }
+
+    // Remove gráficos existentes antes de adicionar novos
+    if (globalThis.yellowGraphics) {
+      removeGraphics(globalThis.yellowGraphics);
+      globalThis.yellowGraphics = null;
+    }
+    if (globalThis.greenGraphics) {
+      removeGraphics(globalThis.greenGraphics);
+      globalThis.greenGraphics = null;
+    }
+    if (globalThis.blueGraphics) {
+      removeGraphics(globalThis.blueGraphics);
+      globalThis.blueGraphics = null;
+    }
+
+    // Adiciona gráficos amarelos se count for exatamente 2
+    if (count === 3) {
+      addGraphicsYellow();
+    }
+
+    // Adiciona gráficos verdes se count for maior que 1
+    if (count >= 2) {
+      addGraphicsGreen();
+    }
+    if (count >= 1) {
+      addGraphicsBlue();
     }
   }
 
