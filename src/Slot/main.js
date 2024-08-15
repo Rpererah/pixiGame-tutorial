@@ -6,6 +6,8 @@ import {
   Sprite,
   BlurFilter,
   Graphics,
+  Text,
+  TextStyle,
 } from "pixi.js";
 
 (async () => {
@@ -64,6 +66,13 @@ import {
     { texture: Texture.from("src/Slot/assets/seven.png"), label: "seven" },
   ];
 
+  const spriteValues = {
+    cherry: 10,
+    galaxy: 20,
+    pikachu: 30,
+    seven: 40,
+  };
+
   // Build the reels
   const reels = [];
   const reelContainer = new Container();
@@ -111,6 +120,8 @@ import {
 
   app.stage.addChild(reelContainer);
 
+  let score = 0;
+
   function checkWinningCondition() {
     const reelResults = [];
 
@@ -125,7 +136,6 @@ import {
       });
     });
 
-    // Ordena os resultados pela coordenada y
     reelResults.sort((a, b) => a.y - b.y);
 
     console.log("Slot Positions:", reelResults);
@@ -136,11 +146,11 @@ import {
     function getLinesForCount(count) {
       switch (count) {
         case 1:
-          return [15]; // Linha única
+          return [15];
         case 2:
-          return [-90, 15, 120]; // Verifica as 3 linhas horizontais
+          return [-90, 15, 120];
         case 3:
-          return [-90, 15, 120]; // Inclui linhas horizontais e diagonais
+          return [-90, 15, 120];
         default:
           return [15];
       }
@@ -151,7 +161,6 @@ import {
     let winningLine = null;
     let winningLabel = null;
 
-    // Verifica linhas horizontais
     for (const line of lines) {
       const filteredResults = reelResults.filter(
         (result) =>
@@ -171,6 +180,11 @@ import {
           console.log(
             `Ganhou na ${winningLine} com o rótulo do sprite: ${label}`
           );
+
+          // Atualiza a pontuação com base no símbolo vencedor
+          const symbolScore = spriteValues[label] || 0;
+          score += symbolScore;
+          ScoreText.text = score.toString(); // Atualiza o texto da pontuação
           break;
         }
       }
@@ -178,7 +192,6 @@ import {
       if (winningLine) break;
     }
 
-    // Função para verificar diagonais, chamada somente se count for 2
     function checkDiagonals() {
       const diagonals = [
         { positions: [0, 4, 8], name: "Diagonal 1" },
@@ -201,12 +214,17 @@ import {
           console.log(
             `Ganhou na ${winningLine} com o rótulo do sprite: ${winningLabel}`
           );
+
+          // Atualiza a pontuação com base no símbolo vencedor
+          const symbolScore = spriteValues[winningLabel] || 0;
+          score += symbolScore;
+          ScoreText.text = score.toString(); // Atualiza o texto da pontuação
           return;
         }
       }
     }
 
-    if (count === 2) {
+    if (count === 3) {
       checkDiagonals();
     }
 
@@ -367,27 +385,6 @@ import {
 
   let count = 0;
 
-  //eh amarelo errei a cor arrumar depois
-  const littlegreen = new Graphics();
-  littlegreen
-    .roundRect(130, 20, 28, 5, 15)
-    .fill({ color: 0xf8f000, alpha: 0.7 });
-
-  // Definindo a rotação para 45 graus
-  littlegreen.rotation = Math.PI / 6;
-
-  app.stage.addChild(littlegreen);
-
-  const littlegreen2 = new Graphics();
-  littlegreen2
-    .roundRect(500, 0, 28, 100, 125)
-    .fill({ color: 0xf8f000, alpha: 0.7 });
-
-  // Definindo a rotação para 45 graus
-  littlegreen2.rotation = Math.PI / 4;
-
-  app.stage.addChild(littlegreen2);
-
   //teste de ligar
   // Função para adicionar gráficos amarelos
   function addGraphicsYellow() {
@@ -408,6 +405,32 @@ import {
           .fill({ color: 0xf8f000, alpha: 0.7 });
         app.stage.addChild(roundedRectangle);
         globalThis.yellowGraphics.push(roundedRectangle);
+      });
+    }
+  }
+  function addLittleYellowGraphics() {
+    if (!globalThis.littleYellowGraphics) {
+      globalThis.littleYellowGraphics = [];
+
+      const graphicsData = [
+        { x: 130, y: 21, width: 25, rotation: Math.PI / 6 },
+        { x: 536, y: 421, width: 25, rotation: -Math.PI / 6 },
+        { x: -118, y: 407, width: 25, rotation: -Math.PI / 6 },
+        { x: 787, y: 7, width: 25, rotation: Math.PI / 6 },
+        { x: 570, y: 12, width: 15, rotation: Math.PI / 6 },
+        { x: 356, y: 16, width: 15, rotation: Math.PI / 6 },
+        { x: 108, y: 412, width: 15, rotation: -Math.PI / 6 },
+        { x: 322, y: 416, width: 15, rotation: -Math.PI / 6 },
+      ];
+
+      graphicsData.forEach((data) => {
+        const graphics = new Graphics();
+        graphics
+          .roundRect(data.x, data.y, data.width, 5, 15)
+          .fill({ color: 0xf8f000, alpha: 0.8 });
+        graphics.rotation = data.rotation;
+        app.stage.addChild(graphics);
+        globalThis.littleYellowGraphics.push(graphics);
       });
     }
   }
@@ -455,6 +478,88 @@ import {
     }
   }
 
+  function addLittleBlueGraphics() {
+    if (!globalThis.littleBlueGraphics) {
+      globalThis.littleBlueGraphics = [];
+
+      const blueGraphicsData = [
+        { x: 103, y: 247, width: 25 },
+        { x: 299, y: 247, width: 15 },
+        { x: 486, y: 247, width: 15 },
+        { x: 672, y: 247, width: 25 },
+      ];
+
+      blueGraphicsData.forEach((data) => {
+        const graphics = new Graphics();
+        graphics
+          .roundRect(data.x, data.y, data.width, 5, 15)
+          .fill({ color: 0x7a7aff, alpha: 0.8 });
+        app.stage.addChild(graphics);
+        globalThis.littleBlueGraphics.push(graphics);
+      });
+    }
+  }
+
+  function addLittleGreenGraphics() {
+    if (!globalThis.littleGreenGraphics) {
+      globalThis.littleGreenGraphics = [];
+
+      const greenGraphicsData = [
+        { x: 104, y: 147, width: 25 },
+        { x: 672, y: 147, width: 25 },
+        { x: 299, y: 147, width: 15 },
+        { x: 486, y: 147, width: 15 },
+        { x: 104, y: 347, width: 25 },
+        { x: 672, y: 347, width: 25 },
+        { x: 299, y: 347, width: 15 },
+        { x: 486, y: 347, width: 15 },
+      ];
+
+      greenGraphicsData.forEach((data) => {
+        const graphics = new Graphics();
+        graphics
+          .roundRect(data.x, data.y, data.width, 5, 15)
+          .fill({ color: 0x66e5a4, alpha: 0.7 });
+        app.stage.addChild(graphics);
+        globalThis.littleGreenGraphics.push(graphics);
+      });
+    }
+  }
+
+  function removeAllYellowGraphics() {
+    if (globalThis.yellowGraphics) {
+      removeGraphics(globalThis.yellowGraphics);
+      globalThis.yellowGraphics = null;
+    }
+    if (globalThis.littleYellowGraphics) {
+      removeGraphics(globalThis.littleYellowGraphics);
+      globalThis.littleYellowGraphics = null;
+    }
+  }
+
+  function removeAllBlueGraphics() {
+    if (globalThis.blueGraphics) {
+      removeGraphics(globalThis.blueGraphics);
+      globalThis.blueGraphics = null;
+    }
+
+    if (globalThis.littleBlueGraphics) {
+      removeGraphics(globalThis.littleBlueGraphics);
+      globalThis.littleBlueGraphics = null;
+    }
+  }
+
+  function removeAllGreenGraphics() {
+    if (globalThis.greenGraphics) {
+      removeGraphics(globalThis.greenGraphics);
+      globalThis.greenGraphics = null;
+    }
+    if (globalThis.littleGreenGraphics) {
+      removeGraphics(globalThis.littleGreenGraphics);
+      globalThis.littleGreenGraphics = null;
+    }
+  }
+
   // Função para remover gráficos
   function removeGraphics(graphics) {
     if (graphics) {
@@ -466,6 +571,8 @@ import {
 
   // Atualiza os gráficos com base no valor de count
   function updateCount(increment) {
+    if (running) return;
+
     count += increment;
     console.log("Atualizando count para:", count);
 
@@ -476,32 +583,37 @@ import {
     }
 
     // Remove gráficos existentes antes de adicionar novos
-    if (globalThis.yellowGraphics) {
-      removeGraphics(globalThis.yellowGraphics);
-      globalThis.yellowGraphics = null;
-    }
-    if (globalThis.greenGraphics) {
-      removeGraphics(globalThis.greenGraphics);
-      globalThis.greenGraphics = null;
-    }
-    if (globalThis.blueGraphics) {
-      removeGraphics(globalThis.blueGraphics);
-      globalThis.blueGraphics = null;
-    }
+    removeAllYellowGraphics();
+    removeAllBlueGraphics();
+    removeAllGreenGraphics();
 
-    // Adiciona gráficos amarelos se count for exatamente 2
     if (count === 3) {
       addGraphicsYellow();
+      addLittleYellowGraphics();
     }
 
-    // Adiciona gráficos verdes se count for maior que 1
     if (count >= 2) {
       addGraphicsGreen();
+      addLittleGreenGraphics();
     }
     if (count >= 1) {
       addGraphicsBlue();
+      addLittleBlueGraphics();
     }
   }
+  const TextScoreStyle = new TextStyle({
+    fontFamily: "Arial",
+    fontSize: 28,
+    fontWeight: "bold",
+    fill: "#ff0000",
+    align: "center",
+    stroke: "#000000",
+    strokeThickness: 4,
+  });
+  const ScoreText = new Text({ text: "0", style: TextScoreStyle });
+  ScoreText.x = 280;
+  ScoreText.y = 550;
+  app.stage.addChild(ScoreText);
 
   function handleKeyDown(event) {
     switch (event.key) {
